@@ -1,0 +1,1 @@
+{"version":3,"file":"create-message.dto.js","sourceRoot":"","sources":["../../../../src/modules/assistant/dtos/create-message.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAuD;AAEvD,MAAa,gBAAgB;IAE3B,MAAM,CAAS;IAGf,OAAO,CAAS;IAGhB,QAAQ,CAAuB;CAChC;AATD,4CASC;AAPC;IADC,IAAA,0BAAQ,GAAE;;gDACI;AAGf;IADC,IAAA,0BAAQ,GAAE;;iDACK;AAGhB;IADC,IAAA,4BAAU,GAAE;;kDACkB"}
