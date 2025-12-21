@@ -1,0 +1,180 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  CANDIDATE
+  RECRUITER
+  COMPANY_ADMIN
+  ADMIN
+}
+
+enum EmploymentType {
+  CLT
+  PJ
+  FREELANCE
+  INTERNSHIP
+}
+
+enum WorkModel {
+  REMOTE
+  HYBRID
+  ON_SITE
+}
+
+enum ApplicationStatus {
+  PENDING
+  UNDER_REVIEW
+  INTERVIEW
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum CompanySize {
+  SMALL
+  MEDIUM
+  LARGE
+  ENTERPRISE
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  SOFT_DELETE
+  APPLY
+  UPLOAD
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String
+  password  String
+  role      UserRole  @default(CANDIDATE)
+
+  company   Company?  @relation(fields: [companyId], references: [id])
+  companyId String?
+
+  resumes       Resume[]
+  applications  Application[]
+  auditLogs     AuditLog[] @relation("UserAuditLogs")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+}
+
+
+model Company {
+  id          String       @id @default(cuid())
+  name        String
+  website     String?
+  description String?
+  industry    String?
+  size        CompanySize?
+  logoUrl     String?
+
+  jobs        Job[]
+  users       User[]
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  deletedAt   DateTime?
+}
+
+model Job {
+  id             String          @id @default(cuid())
+  company        Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId      String
+
+  title          String
+  slug           String          @unique
+  description    String
+
+  employmentType EmploymentType
+  workModel      WorkModel
+  location       String?
+  salaryMin      Int?
+  salaryMax      Int?
+
+  techStack         String[]
+  responsibilities  String[]
+  requirementsMust  String[]
+  requirementsNice  String[]
+  benefits          String[]
+
+  viewsCount        Int           @default(0)
+  applicationsCount Int           @default(0)
+
+  isActive       Boolean         @default(true)
+
+  applications   Application[]
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  publishedAt    DateTime        @default(now())
+  deletedAt      DateTime?
+}
+
+model Resume {
+  id           String    @id @default(cuid())
+
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  storageUrl   String
+
+  uploadedAt   DateTime   @default(now())
+  deletedAt    DateTime?
+
+  applications Application[]
+}
+
+model Application {
+  id            String             @id @default(cuid())
+
+  candidate     User               @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  candidateId   String
+
+  job           Job                @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobId         String
+
+  resume        Resume             @relation(fields: [resumeId], references: [id], onDelete: Restrict)
+  resumeId      String
+
+  status        ApplicationStatus  @default(PENDING)
+  coverLetter   String?
+
+  appliedAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  deletedAt     DateTime?
+
+  @@unique([candidateId, jobId])
+}
+
+model AuditLog {
+  id        String      @id @default(cuid())
+
+  actor     User?       @relation("UserAuditLogs", fields: [actorId], references: [id])
+  actorId   String?
+
+  entity    String
+  entityId  String
+  action    AuditAction
+  metadata  Json?
+
+  createdAt DateTime    @default(now())
+
+  @@index([entity, entityId])
+  @@index([actorId, createdAt])
+}

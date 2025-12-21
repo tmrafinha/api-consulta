@@ -1,0 +1,60 @@
+import { z } from "zod";
+export declare const CreateJobSchema: z.ZodObject<{
+    companyId: z.ZodString;
+    title: z.ZodString;
+    slug: z.ZodString;
+    description: z.ZodString;
+    employmentType: z.ZodNativeEnum<{
+        CLT: "CLT";
+        PJ: "PJ";
+        FREELANCE: "FREELANCE";
+        INTERNSHIP: "INTERNSHIP";
+    }>;
+    workModel: z.ZodNativeEnum<{
+        REMOTE: "REMOTE";
+        HYBRID: "HYBRID";
+        ON_SITE: "ON_SITE";
+    }>;
+    location: z.ZodOptional<z.ZodString>;
+    salaryMin: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
+    salaryMax: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
+    techStack: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    responsibilities: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    requirementsMust: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    requirementsNice: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    benefits: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    isActive: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    companyId: string;
+    description: string;
+    title: string;
+    slug: string;
+    employmentType: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP";
+    workModel: "REMOTE" | "HYBRID" | "ON_SITE";
+    techStack: string[];
+    responsibilities: string[];
+    requirementsMust: string[];
+    requirementsNice: string[];
+    benefits: string[];
+    isActive: boolean;
+    location?: string | undefined;
+    salaryMin?: number | null | undefined;
+    salaryMax?: number | null | undefined;
+}, {
+    companyId: string;
+    description: string;
+    title: string;
+    slug: string;
+    employmentType: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP";
+    workModel: "REMOTE" | "HYBRID" | "ON_SITE";
+    location?: string | undefined;
+    salaryMin?: number | null | undefined;
+    salaryMax?: number | null | undefined;
+    techStack?: string[] | undefined;
+    responsibilities?: string[] | undefined;
+    requirementsMust?: string[] | undefined;
+    requirementsNice?: string[] | undefined;
+    benefits?: string[] | undefined;
+    isActive?: boolean | undefined;
+}>;
+export type CreateJobDto = z.infer<typeof CreateJobSchema>;

@@ -1,49 +1,80 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
-} from '@nestjs/common';
-import { Request, Response } from 'express';
-import { AppErrorDto } from 'src/dtos/app-error.dto';
+} from "@nestjs/common";
+import { Request, Response } from "express";
+import { Prisma } from "@prisma/client";
+import { Logger } from "nestjs-pino";
+import { randomUUID } from "crypto";
+import { mapPrismaError } from "../errors/prisma/prisma-error.mapper";
 
 @Catch()
-export class HttpExceptionFilter implements ExceptionFilter {
+export class GlobalExceptionFilter implements ExceptionFilter {
+  constructor(private readonly logger: Logger) {}
+
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
+    const res = ctx.getResponse<Response>();
+    const req = ctx.getRequest<Request>();
 
-    const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
+    const errorId = randomUUID();
 
-    const message =
-      exception instanceof HttpException
-        ? exception.getResponse()
-        : 'Internal server error';
+    // ----------------------------------------------------------
+    // (1) Prisma errors
+    // ----------------------------------------------------------
+    if (exception instanceof Prisma.PrismaClientKnownRequestError) {
+      const mapped = mapPrismaError(exception);
+      const response = mapped.getResponse() as any;
 
-    const formattedError: AppErrorDto = {
+      return res.status(mapped.getStatus()).json({
+        success: false,
+        statusCode: mapped.getStatus(),
+        error: response.error ?? "Erro de Conflito",
+        message: response.message,
+        errors: response.errors ?? null,
+        meta: this.meta(req, errorId),
+      });
+    }
+
+    // ----------------------------------------------------------
+    // (2) Nest HttpExceptions (Unauthorized, Conflict, etc.)
+    // ----------------------------------------------------------
+    if (exception instanceof HttpException) {
+      const status = exception.getStatus();
+      const response = exception.getResponse() as any;
+
+      return res.status(status).json({
+        success: false,
+        statusCode: status,
+        error: response.error ?? null,
+        message: response.message ?? "Error",
+        errors: response.errors ?? null,
+        meta: this.meta(req, errorId),
+      });
+    }
+
+    // ----------------------------------------------------------
+    // (3) Unknown internal error
+    // ----------------------------------------------------------
+    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
       success: false,
-      data: null,
-      message:
-        typeof message === 'string'
-          ? message
-          : (message as any)?.message || 'Unexpected error',
-      meta: {
-        timestamp: new Date().toISOString(),
-        path: request.url,
-        method: request.method,
-      },
-      errors: Array.isArray((message as any)?.message)
-        ? (message as any).message
-        : typeof message === 'object'
-          ? (message as any)?.errors
-          : null,
-    };
+      statusCode: 500,
+      error: "InternalServerError",
+      message: "Internal server error",
+      errors: null,
+      meta: this.meta(req, errorId),
+    });
+  }
 
-    response.status(status).json(formattedError);
+  private meta(req: Request, errorId: string) {
+    return {
+      path: req.url,
+      method: req.method,
+      timestamp: new Date().toISOString(),
+      errorId,
+    };
   }
 }
