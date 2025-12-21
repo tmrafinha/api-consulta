@@ -4,7 +4,7 @@ import { EmploymentType, WorkModel } from "@prisma/client";
 
 export const JobQuerySchema = PaginationSchema.extend({
   search: z.string().optional(),
-  companyId: z.string().uuid(),
+  companyId: z.string().uuid().optional(),
   employmentType: z.nativeEnum(EmploymentType).optional(),
   workModel: z.nativeEnum(WorkModel).optional(),
   location: z.string().optional(),
