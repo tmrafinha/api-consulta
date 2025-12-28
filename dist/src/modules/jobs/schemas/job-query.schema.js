@@ -6,7 +6,7 @@ const pagination_base_schema_1 = require("../../../common/pagination/pagination-
 const client_1 = require("@prisma/client");
 exports.JobQuerySchema = pagination_base_schema_1.PaginationSchema.extend({
     search: zod_1.z.string().optional(),
-    companyId: zod_1.z.string().uuid(),
+    companyId: zod_1.z.string().uuid().optional(),
     employmentType: zod_1.z.nativeEnum(client_1.EmploymentType).optional(),
     workModel: zod_1.z.nativeEnum(client_1.WorkModel).optional(),
     location: zod_1.z.string().optional(),

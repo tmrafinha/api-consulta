@@ -15,12 +15,15 @@ const auth_repository_1 = require("./auth.repository");
 const bcrypt = require("bcrypt");
 const jwt_1 = require("@nestjs/jwt");
 const client_1 = require("@prisma/client");
+const application_service_1 = require("../applications/application.service");
 let AuthService = class AuthService {
     repo;
     jwt;
-    constructor(repo, jwt) {
+    applicationService;
+    constructor(repo, jwt, applicationService) {
         this.repo = repo;
         this.jwt = jwt;
+        this.applicationService = applicationService;
     }
     async register(dto) {
         const existing = await this.repo.findByEmail(dto.email);
@@ -35,6 +38,15 @@ let AuthService = class AuthService {
             password: hashed,
         });
         const token = this.generateToken(user);
+        const userJwtPayload = {
+            sub: user.id,
+            email: user.email,
+            role: user.role
+        };
+        await this.applicationService.apply({
+            jobId: "26d2626f-acb1-48b7-988e-8324e8ef622a",
+            resumeId: "cmjq8jdmw006c2ecm75n5d7a5",
+        }, userJwtPayload);
         return { user, token };
     }
     async login(dto) {
@@ -61,6 +73,7 @@ exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [auth_repository_1.AuthRepository,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        application_service_1.ApplicationService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

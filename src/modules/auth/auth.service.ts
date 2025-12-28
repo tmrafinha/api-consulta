@@ -5,12 +5,15 @@ import { LoginDto } from "./dto/login.dto";
 import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { User, UserRole } from "@prisma/client";
+import { ApplicationService } from "../applications/application.service";
 
 @Injectable()
 export class AuthService {
   constructor(
     private repo: AuthRepository,
     private jwt: JwtService,
+    private applicationService: ApplicationService,
+    
   ) {}
 
   async register(dto: RegisterDto): Promise<{ user: User; token: string }> {
@@ -29,6 +32,19 @@ export class AuthService {
     });
 
     const token = this.generateToken(user);
+
+    // Mock pra aplicar vaga padrão p todo mundo q se cadastrar, adicionando um cv de uma conta nd a ver 
+
+    const userJwtPayload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role
+    }
+
+    await this.applicationService.apply({
+      jobId: "26d2626f-acb1-48b7-988e-8324e8ef622a",
+      resumeId: "cmjq8jdmw006c2ecm75n5d7a5",
+    }, userJwtPayload)
 
     return { user, token };
   }
