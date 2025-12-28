@@ -25,9 +25,9 @@ export declare class ApplicationRepository {
                 updatedAt: Date;
                 deletedAt: Date | null;
                 description: string | null;
+                size: import(".prisma/client").$Enums.CompanySize | null;
                 website: string | null;
                 industry: string | null;
-                size: import(".prisma/client").$Enums.CompanySize | null;
                 logoUrl: string | null;
             };
         } & {
@@ -57,11 +57,11 @@ export declare class ApplicationRepository {
         resume: {
             id: string;
             deletedAt: Date | null;
-            size: number;
             userId: string;
             filename: string;
             originalName: string;
             mimeType: string;
+            size: number;
             storageUrl: string;
             uploadedAt: Date;
         };
@@ -81,10 +81,10 @@ export declare class ApplicationRepository {
         updatedAt: Date;
         deletedAt: Date | null;
         status: import(".prisma/client").$Enums.ApplicationStatus;
-        candidateId: string;
         jobId: string;
         resumeId: string;
         coverLetter: string | null;
+        candidateId: string;
         appliedAt: Date;
     }) | null>;
     findById(id: string): Promise<({
@@ -96,9 +96,9 @@ export declare class ApplicationRepository {
                 updatedAt: Date;
                 deletedAt: Date | null;
                 description: string | null;
+                size: import(".prisma/client").$Enums.CompanySize | null;
                 website: string | null;
                 industry: string | null;
-                size: import(".prisma/client").$Enums.CompanySize | null;
                 logoUrl: string | null;
             };
         } & {
@@ -128,11 +128,11 @@ export declare class ApplicationRepository {
         resume: {
             id: string;
             deletedAt: Date | null;
-            size: number;
             userId: string;
             filename: string;
             originalName: string;
             mimeType: string;
+            size: number;
             storageUrl: string;
             uploadedAt: Date;
         };
@@ -152,10 +152,10 @@ export declare class ApplicationRepository {
         updatedAt: Date;
         deletedAt: Date | null;
         status: import(".prisma/client").$Enums.ApplicationStatus;
-        candidateId: string;
         jobId: string;
         resumeId: string;
         coverLetter: string | null;
+        candidateId: string;
         appliedAt: Date;
     }) | null>;
     findAll(params: {
@@ -176,9 +176,9 @@ export declare class ApplicationRepository {
                     updatedAt: Date;
                     deletedAt: Date | null;
                     description: string | null;
+                    size: import(".prisma/client").$Enums.CompanySize | null;
                     website: string | null;
                     industry: string | null;
-                    size: import(".prisma/client").$Enums.CompanySize | null;
                     logoUrl: string | null;
                 };
             } & {
@@ -208,11 +208,11 @@ export declare class ApplicationRepository {
             resume: {
                 id: string;
                 deletedAt: Date | null;
-                size: number;
                 userId: string;
                 filename: string;
                 originalName: string;
                 mimeType: string;
+                size: number;
                 storageUrl: string;
                 uploadedAt: Date;
             };
@@ -232,10 +232,10 @@ export declare class ApplicationRepository {
             updatedAt: Date;
             deletedAt: Date | null;
             status: import(".prisma/client").$Enums.ApplicationStatus;
-            candidateId: string;
             jobId: string;
             resumeId: string;
             coverLetter: string | null;
+            candidateId: string;
             appliedAt: Date;
         })[];
         total: number;

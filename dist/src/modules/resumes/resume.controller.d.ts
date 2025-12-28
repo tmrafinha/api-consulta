@@ -7,11 +7,11 @@ export declare class ResumeController {
     upload(file: Express.Multer.File, user: JwtPayload): Promise<{
         id: string;
         deletedAt: Date | null;
-        size: number;
         userId: string;
         filename: string;
         originalName: string;
         mimeType: string;
+        size: number;
         storageUrl: string;
         uploadedAt: Date;
     }>;
@@ -19,11 +19,11 @@ export declare class ResumeController {
         items: {
             id: string;
             deletedAt: Date | null;
-            size: number;
             userId: string;
             filename: string;
             originalName: string;
             mimeType: string;
+            size: number;
             storageUrl: string;
             uploadedAt: Date;
         }[];
@@ -40,11 +40,11 @@ export declare class ResumeController {
     delete(id: string, user: JwtPayload): Promise<{
         id: string;
         deletedAt: Date | null;
-        size: number;
         userId: string;
         filename: string;
         originalName: string;
         mimeType: string;
+        size: number;
         storageUrl: string;
         uploadedAt: Date;
     }>;

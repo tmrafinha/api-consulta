@@ -14,9 +14,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     }>;
     update(id: string, dto: UpdateCompanyDto): Promise<{
@@ -26,9 +26,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     }>;
     findById(id: string): Promise<{
@@ -38,9 +38,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     }>;
     findAll(query: CompanyQueryDto): Promise<{
@@ -51,9 +51,9 @@ export declare class CompanyService {
             updatedAt: Date;
             deletedAt: Date | null;
             description: string | null;
+            size: import(".prisma/client").$Enums.CompanySize | null;
             website: string | null;
             industry: string | null;
-            size: import(".prisma/client").$Enums.CompanySize | null;
             logoUrl: string | null;
         }[];
         meta: {
@@ -70,9 +70,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     }>;
     uploadLogo(id: string, file: Express.Multer.File): Promise<{
@@ -82,9 +82,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     } | undefined>;
     getLogoUrl(id: string): Promise<{
@@ -97,9 +97,9 @@ export declare class CompanyService {
         updatedAt: Date;
         deletedAt: Date | null;
         description: string | null;
+        size: import(".prisma/client").$Enums.CompanySize | null;
         website: string | null;
         industry: string | null;
-        size: import(".prisma/client").$Enums.CompanySize | null;
         logoUrl: string | null;
     }>;
 }

@@ -25,11 +25,11 @@ export declare class ResumeRepository {
         items: {
             id: string;
             deletedAt: Date | null;
-            size: number;
             userId: string;
             filename: string;
             originalName: string;
             mimeType: string;
+            size: number;
             storageUrl: string;
             uploadedAt: Date;
         }[];

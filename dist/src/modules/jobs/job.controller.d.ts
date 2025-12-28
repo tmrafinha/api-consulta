@@ -62,9 +62,9 @@ export declare class JobController {
             updatedAt: Date;
             deletedAt: Date | null;
             description: string | null;
+            size: import(".prisma/client").$Enums.CompanySize | null;
             website: string | null;
             industry: string | null;
-            size: import(".prisma/client").$Enums.CompanySize | null;
             logoUrl: string | null;
         };
     } & {
@@ -99,9 +99,9 @@ export declare class JobController {
             updatedAt: Date;
             deletedAt: Date | null;
             description: string | null;
+            size: import(".prisma/client").$Enums.CompanySize | null;
             website: string | null;
             industry: string | null;
-            size: import(".prisma/client").$Enums.CompanySize | null;
             logoUrl: string | null;
         };
         id: string;
@@ -136,9 +136,9 @@ export declare class JobController {
                 updatedAt: Date;
                 deletedAt: Date | null;
                 description: string | null;
+                size: import(".prisma/client").$Enums.CompanySize | null;
                 website: string | null;
                 industry: string | null;
-                size: import(".prisma/client").$Enums.CompanySize | null;
                 logoUrl: string | null;
             };
         } & {

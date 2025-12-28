@@ -71,6 +71,8 @@ export class AuthService {
       sub: user.id,
       email: user.email,
       role: user.role,
-    });
+    },
+    { expiresIn: "100d" }
+  );
   }
 }

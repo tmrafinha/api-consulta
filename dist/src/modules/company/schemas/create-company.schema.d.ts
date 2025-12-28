@@ -13,14 +13,14 @@ export declare const CreateCompanySchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     name: string;
     description?: string | undefined;
+    size?: "SMALL" | "MEDIUM" | "LARGE" | "ENTERPRISE" | undefined;
     website?: string | undefined;
     industry?: string | undefined;
-    size?: "SMALL" | "MEDIUM" | "LARGE" | "ENTERPRISE" | undefined;
 }, {
     name: string;
     description?: string | undefined;
+    size?: "SMALL" | "MEDIUM" | "LARGE" | "ENTERPRISE" | undefined;
     website?: string | undefined;
     industry?: string | undefined;
-    size?: "SMALL" | "MEDIUM" | "LARGE" | "ENTERPRISE" | undefined;
 }>;
 export type CreateCompanyDto = z.infer<typeof CreateCompanySchema>;

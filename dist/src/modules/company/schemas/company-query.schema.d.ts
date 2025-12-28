@@ -14,15 +14,15 @@ export declare const CompanyQuerySchema: z.ZodObject<z.objectUtil.extendShape<{
     page: number;
     limit: number;
     search?: string | undefined;
-    industry?: string | undefined;
     size?: string | undefined;
+    industry?: string | undefined;
 }, {
     search?: string | undefined;
     sortBy?: string | undefined;
     sortOrder?: "asc" | "desc" | undefined;
     page?: string | undefined;
     limit?: string | undefined;
-    industry?: string | undefined;
     size?: string | undefined;
+    industry?: string | undefined;
 }>;
 export type CompanyQueryDto = z.infer<typeof CompanyQuerySchema>;
