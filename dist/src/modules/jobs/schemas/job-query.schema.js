@@ -9,6 +9,16 @@ exports.JobQuerySchema = pagination_base_schema_1.PaginationSchema.extend({
     companyId: zod_1.z.string().uuid().optional(),
     employmentType: zod_1.z.nativeEnum(client_1.EmploymentType).optional(),
     workModel: zod_1.z.nativeEnum(client_1.WorkModel).optional(),
+    country: zod_1.z.preprocess((val) => {
+        if (!val)
+            return undefined;
+        return Array.isArray(val) ? val : [val];
+    }, zod_1.z.array(zod_1.z.string()).optional()),
+    seniorityLevel: zod_1.z.preprocess((val) => {
+        if (!val)
+            return undefined;
+        return Array.isArray(val) ? val : [val];
+    }, zod_1.z.array(zod_1.z.nativeEnum(client_1.SeniorityLevel)).optional()),
     location: zod_1.z.string().optional(),
     minSalary: zod_1.z.coerce.number().optional(),
     maxSalary: zod_1.z.coerce.number().optional(),

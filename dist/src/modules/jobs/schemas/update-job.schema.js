@@ -13,6 +13,8 @@ exports.UpdateJobSchema = zod_1.z.object({
     description: zod_1.z.string().min(10).optional(),
     employmentType: zod_1.z.nativeEnum(client_1.EmploymentType).optional(),
     workModel: zod_1.z.nativeEnum(client_1.WorkModel).optional(),
+    country: zod_1.z.string().optional(),
+    seniorityLevel: zod_1.z.nativeEnum(client_1.SeniorityLevel).optional(),
     location: zod_1.z.string().optional(),
     salaryMin: zod_1.z.number().int().min(0).optional(),
     salaryMax: zod_1.z.number().int().optional(),

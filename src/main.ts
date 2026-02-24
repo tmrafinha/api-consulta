@@ -6,8 +6,6 @@ import { ValidationPipe } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
 import { GlobalExceptionFilter } from './common/filters/http-exception.filter'
-import { AuditInterceptor } from './common/interceptors/audit.interceptor'
-import { AuditService } from './modules/audit/audit.service'
 import { BaseResponseInterceptor } from './common/interceptors/base-response.interceptor'
 
 async function bootstrap() {
@@ -59,8 +57,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new BaseResponseInterceptor(logger))
   app.useGlobalFilters(new GlobalExceptionFilter(logger))
 
-  const auditService = app.get(AuditService)
-  app.useGlobalInterceptors(new AuditInterceptor(auditService))
+  // const auditService = app.get(AuditService)
+  // app.useGlobalInterceptors(new AuditInterceptor(auditService))
 
   // ----------------------------
   // Swagger

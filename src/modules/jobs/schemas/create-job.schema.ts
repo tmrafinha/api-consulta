@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EmploymentType, WorkModel } from "@prisma/client";
+import { EmploymentType, SeniorityLevel, WorkModel } from "@prisma/client";
 
 export const CreateJobSchema = z.object({
   companyId: z.string().uuid(),
@@ -17,6 +17,8 @@ export const CreateJobSchema = z.object({
 
   employmentType: z.nativeEnum(EmploymentType),
   workModel: z.nativeEnum(WorkModel),
+  country: z.string().optional(),
+  seniorityLevel: z.nativeEnum(SeniorityLevel).default("JUNIOR"),
 
   location: z.string().optional(),
 

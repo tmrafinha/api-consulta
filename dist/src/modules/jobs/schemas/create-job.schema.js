@@ -13,6 +13,8 @@ exports.CreateJobSchema = zod_1.z.object({
     description: zod_1.z.string().min(10, "Descrição muito curta"),
     employmentType: zod_1.z.nativeEnum(client_1.EmploymentType),
     workModel: zod_1.z.nativeEnum(client_1.WorkModel),
+    country: zod_1.z.string().optional(),
+    seniorityLevel: zod_1.z.nativeEnum(client_1.SeniorityLevel).default("JUNIOR"),
     location: zod_1.z.string().optional(),
     salaryMin: zod_1.z.number().int().min(0).nullable().optional(),
     salaryMax: zod_1.z.number().int().nullable().optional(),

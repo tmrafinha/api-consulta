@@ -49,7 +49,7 @@ let JobService = class JobService {
         return { ...job, appliedByCurrentUser };
     }
     async findAll(query, user) {
-        const { page, limit, search, companyId, workModel, employmentType, location, minSalary, maxSalary, sortBy, sortOrder, } = query;
+        const { page, limit, search, companyId, workModel, employmentType, country, seniorityLevel, location, minSalary, maxSalary, sortBy, sortOrder, } = query;
         const pagination = {
             skip: (page - 1) * limit,
             take: limit,
@@ -59,6 +59,12 @@ let JobService = class JobService {
             filters.companyId = companyId;
         if (workModel)
             filters.workModel = workModel;
+        if (country) {
+            filters.country = { in: country };
+        }
+        if (seniorityLevel) {
+            filters.seniorityLevel = { in: seniorityLevel };
+        }
         if (employmentType)
             filters.employmentType = employmentType;
         if (location)

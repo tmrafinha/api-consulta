@@ -6,8 +6,6 @@ const nestjs_pino_1 = require("nestjs-pino");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const http_exception_filter_1 = require("./common/filters/http-exception.filter");
-const audit_interceptor_1 = require("./common/interceptors/audit.interceptor");
-const audit_service_1 = require("./modules/audit/audit.service");
 const base_response_interceptor_1 = require("./common/interceptors/base-response.interceptor");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, { bufferLogs: true });
@@ -39,8 +37,6 @@ async function bootstrap() {
     }));
     app.useGlobalInterceptors(new base_response_interceptor_1.BaseResponseInterceptor(logger));
     app.useGlobalFilters(new http_exception_filter_1.GlobalExceptionFilter(logger));
-    const auditService = app.get(audit_service_1.AuditService);
-    app.useGlobalInterceptors(new audit_interceptor_1.AuditInterceptor(auditService));
     const swaggerConfig = new swagger_1.DocumentBuilder()
         .setTitle('Helper AI API')
         .setDescription('API para gestão de usuários, empresas, vagas e currículos')

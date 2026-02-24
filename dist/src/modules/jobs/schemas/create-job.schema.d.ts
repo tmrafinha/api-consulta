@@ -15,6 +15,12 @@ export declare const CreateJobSchema: z.ZodObject<{
         HYBRID: "HYBRID";
         ON_SITE: "ON_SITE";
     }>;
+    country: z.ZodOptional<z.ZodString>;
+    seniorityLevel: z.ZodDefault<z.ZodNativeEnum<{
+        JUNIOR: "JUNIOR";
+        PLENO: "PLENO";
+        SENIOR: "SENIOR";
+    }>>;
     location: z.ZodOptional<z.ZodString>;
     salaryMin: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     salaryMax: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
@@ -31,6 +37,7 @@ export declare const CreateJobSchema: z.ZodObject<{
     slug: string;
     employmentType: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP";
     workModel: "REMOTE" | "HYBRID" | "ON_SITE";
+    seniorityLevel: "JUNIOR" | "PLENO" | "SENIOR";
     techStack: string[];
     responsibilities: string[];
     requirementsMust: string[];
@@ -38,6 +45,7 @@ export declare const CreateJobSchema: z.ZodObject<{
     benefits: string[];
     isActive: boolean;
     location?: string | undefined;
+    country?: string | undefined;
     salaryMin?: number | null | undefined;
     salaryMax?: number | null | undefined;
 }, {
@@ -48,6 +56,8 @@ export declare const CreateJobSchema: z.ZodObject<{
     employmentType: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP";
     workModel: "REMOTE" | "HYBRID" | "ON_SITE";
     location?: string | undefined;
+    country?: string | undefined;
+    seniorityLevel?: "JUNIOR" | "PLENO" | "SENIOR" | undefined;
     salaryMin?: number | null | undefined;
     salaryMax?: number | null | undefined;
     techStack?: string[] | undefined;

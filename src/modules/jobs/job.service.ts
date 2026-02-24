@@ -59,6 +59,8 @@ export class JobService {
       companyId,
       workModel,
       employmentType,
+      country,
+      seniorityLevel,
       location,
       minSalary,
       maxSalary,
@@ -75,6 +77,13 @@ export class JobService {
 
     if (companyId) filters.companyId = companyId;
     if (workModel) filters.workModel = workModel;
+    if (country) {
+      filters.country = { in: country };
+    }
+
+    if (seniorityLevel) {
+      filters.seniorityLevel = { in: seniorityLevel };
+    }
     if (employmentType) filters.employmentType = employmentType;
     if (location)
       filters.location = { contains: location, mode: 'insensitive' };

@@ -17,6 +17,9 @@ export declare class JobRepository {
         employmentType: import(".prisma/client").$Enums.EmploymentType;
         workModel: import(".prisma/client").$Enums.WorkModel;
         location: string | null;
+        country: string | null;
+        seniorityLevel: import(".prisma/client").$Enums.SeniorityLevel;
+        area: import(".prisma/client").$Enums.JobArea;
         salaryMin: number | null;
         salaryMax: number | null;
         techStack: string[];
@@ -54,6 +57,9 @@ export declare class JobRepository {
         employmentType: import(".prisma/client").$Enums.EmploymentType;
         workModel: import(".prisma/client").$Enums.WorkModel;
         location: string | null;
+        country: string | null;
+        seniorityLevel: import(".prisma/client").$Enums.SeniorityLevel;
+        area: import(".prisma/client").$Enums.JobArea;
         salaryMin: number | null;
         salaryMax: number | null;
         techStack: string[];
@@ -78,6 +84,9 @@ export declare class JobRepository {
         employmentType: import(".prisma/client").$Enums.EmploymentType;
         workModel: import(".prisma/client").$Enums.WorkModel;
         location: string | null;
+        country: string | null;
+        seniorityLevel: import(".prisma/client").$Enums.SeniorityLevel;
+        area: import(".prisma/client").$Enums.JobArea;
         salaryMin: number | null;
         salaryMax: number | null;
         techStack: string[];
@@ -102,6 +111,9 @@ export declare class JobRepository {
         employmentType: import(".prisma/client").$Enums.EmploymentType;
         workModel: import(".prisma/client").$Enums.WorkModel;
         location: string | null;
+        country: string | null;
+        seniorityLevel: import(".prisma/client").$Enums.SeniorityLevel;
+        area: import(".prisma/client").$Enums.JobArea;
         salaryMin: number | null;
         salaryMax: number | null;
         techStack: string[];
@@ -148,6 +160,9 @@ export declare class JobRepository {
             employmentType: import(".prisma/client").$Enums.EmploymentType;
             workModel: import(".prisma/client").$Enums.WorkModel;
             location: string | null;
+            country: string | null;
+            seniorityLevel: import(".prisma/client").$Enums.SeniorityLevel;
+            area: import(".prisma/client").$Enums.JobArea;
             salaryMin: number | null;
             salaryMax: number | null;
             techStack: string[];

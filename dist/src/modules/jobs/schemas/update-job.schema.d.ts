@@ -14,6 +14,12 @@ export declare const UpdateJobSchema: z.ZodObject<{
         HYBRID: "HYBRID";
         ON_SITE: "ON_SITE";
     }>>;
+    country: z.ZodOptional<z.ZodString>;
+    seniorityLevel: z.ZodOptional<z.ZodNativeEnum<{
+        JUNIOR: "JUNIOR";
+        PLENO: "PLENO";
+        SENIOR: "SENIOR";
+    }>>;
     location: z.ZodOptional<z.ZodString>;
     salaryMin: z.ZodOptional<z.ZodNumber>;
     salaryMax: z.ZodOptional<z.ZodNumber>;
@@ -30,6 +36,8 @@ export declare const UpdateJobSchema: z.ZodObject<{
     employmentType?: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP" | undefined;
     workModel?: "REMOTE" | "HYBRID" | "ON_SITE" | undefined;
     location?: string | undefined;
+    country?: string | undefined;
+    seniorityLevel?: "JUNIOR" | "PLENO" | "SENIOR" | undefined;
     salaryMin?: number | undefined;
     salaryMax?: number | undefined;
     techStack?: string[] | undefined;
@@ -45,6 +53,8 @@ export declare const UpdateJobSchema: z.ZodObject<{
     employmentType?: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP" | undefined;
     workModel?: "REMOTE" | "HYBRID" | "ON_SITE" | undefined;
     location?: string | undefined;
+    country?: string | undefined;
+    seniorityLevel?: "JUNIOR" | "PLENO" | "SENIOR" | undefined;
     salaryMin?: number | undefined;
     salaryMax?: number | undefined;
     techStack?: string[] | undefined;

@@ -51,6 +51,26 @@ enum AuditAction {
   UPLOAD
 }
 
+enum SeniorityLevel {
+  JUNIOR
+  PLENO
+  SENIOR
+}
+
+enum JobArea {
+  FRONTEND
+  BACKEND
+  FULLSTACK
+  DEVOPS
+  INFRASTRUCTURE
+  AUTOMATION
+  DATA
+  MOBILE
+  QA
+  SECURITY
+  OTHER
+}
+
 model User {
   id        String    @id @default(cuid())
   email     String    @unique
@@ -69,7 +89,6 @@ model User {
   updatedAt DateTime @updatedAt
   deletedAt DateTime?
 }
-
 
 model Company {
   id          String       @id @default(cuid())
@@ -99,7 +118,13 @@ model Job {
 
   employmentType EmploymentType
   workModel      WorkModel
+
   location       String?
+  country        String?
+
+  seniorityLevel SeniorityLevel  @default(JUNIOR)
+  area           JobArea         @default(OTHER)
+
   salaryMin      Int?
   salaryMax      Int?
 
@@ -119,7 +144,7 @@ model Job {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   publishedAt    DateTime        @default(now())
-  deletedAt      DateTime?
+  deletedAt     DateTime?
 }
 
 model Resume {

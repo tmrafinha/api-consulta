@@ -16,6 +16,12 @@ export declare const JobQuerySchema: z.ZodObject<z.objectUtil.extendShape<{
         HYBRID: "HYBRID";
         ON_SITE: "ON_SITE";
     }>>;
+    country: z.ZodEffects<z.ZodOptional<z.ZodArray<z.ZodString, "many">>, string[] | undefined, unknown>;
+    seniorityLevel: z.ZodEffects<z.ZodOptional<z.ZodArray<z.ZodNativeEnum<{
+        JUNIOR: "JUNIOR";
+        PLENO: "PLENO";
+        SENIOR: "SENIOR";
+    }>, "many">>, ("JUNIOR" | "PLENO" | "SENIOR")[] | undefined, unknown>;
     location: z.ZodOptional<z.ZodString>;
     minSalary: z.ZodOptional<z.ZodNumber>;
     maxSalary: z.ZodOptional<z.ZodNumber>;
@@ -31,6 +37,8 @@ export declare const JobQuerySchema: z.ZodObject<z.objectUtil.extendShape<{
     employmentType?: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP" | undefined;
     workModel?: "REMOTE" | "HYBRID" | "ON_SITE" | undefined;
     location?: string | undefined;
+    country?: string[] | undefined;
+    seniorityLevel?: ("JUNIOR" | "PLENO" | "SENIOR")[] | undefined;
     minSalary?: number | undefined;
     maxSalary?: number | undefined;
 }, {
@@ -43,6 +51,8 @@ export declare const JobQuerySchema: z.ZodObject<z.objectUtil.extendShape<{
     employmentType?: "CLT" | "PJ" | "FREELANCE" | "INTERNSHIP" | undefined;
     workModel?: "REMOTE" | "HYBRID" | "ON_SITE" | undefined;
     location?: string | undefined;
+    country?: unknown;
+    seniorityLevel?: unknown;
     minSalary?: number | undefined;
     maxSalary?: number | undefined;
 }>;
