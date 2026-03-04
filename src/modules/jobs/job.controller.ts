@@ -23,6 +23,7 @@ import { JobQuerySwaggerDto } from './swagger/job-query.swagger.dto';
 
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtPayload } from '../auth/strategies/jwt.dto';
+import { Public } from '../auth/decorators/public.decorator';
 
 @ApiTags('Jobs')
 @Controller('jobs')
@@ -54,6 +55,7 @@ export class JobController {
   }
 
   @Get()
+  @Public()
   @ApiQuery({ type: JobQuerySwaggerDto })
   getAll(
     @Query(new ZodValidationPipe(JobQuerySchema))

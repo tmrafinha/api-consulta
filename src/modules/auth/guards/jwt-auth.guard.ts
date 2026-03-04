@@ -1,19 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { AuthGuard } from '@nestjs/passport';
+import { Injectable } from '@nestjs/common'
+import { Reflector } from '@nestjs/core'
+import { AuthGuard } from '@nestjs/passport'
+import { IS_PUBLIC } from '../decorators/public.decorator' // ajuste o path
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
-    super();
+    super()
   }
 
   canActivate(context) {
-    const isPublic = this.reflector.getAllAndOverride('isPublic', [
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC, [
       context.getHandler(),
       context.getClass(),
-    ]);
-    if (isPublic) return true;
-    return super.canActivate(context);
+    ])
+
+    if (isPublic) return true
+    return super.canActivate(context)
   }
 }
